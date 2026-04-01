@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Geometry Dash - Wave (prototype)</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <canvas id="game" aria-label="Game canvas"></canvas>
+
+    <div id="hud" aria-live="polite">
+      <div class="row">
+        <button class="pill pill-button" id="formBtn" type="button" title="Click to swap form">
+          Wave
+        </button>
+        <div class="pill" id="status">Hold to go up · Release to go down</div>
+      </div>
+      <div class="row">
+        <div class="pill">
+          <span class="dot" id="zoneDot" aria-hidden="true"></span>
+          Zone: <span id="zone">Warmup</span>
+        </div>
+        <div class="pill">Speed: <span id="speed">1.00x</span></div>
+        <div class="pill">Dual: <span id="dual">Off</span></div>
+        <button class="pill pill-button" id="sectionsBtn" type="button" title="Pick what sections can appear">
+          Sections
+        </button>
+        <button class="pill pill-button" id="customBtn" type="button" title="Customize colors/skin">
+          Customize
+        </button>
+      </div>
+      <div class="row">
+        <div class="pill">Distance: <span id="dist">0</span></div>
+        <div class="pill">Best: <span id="best">0</span></div>
+        <div class="pill">Restart: <kbd>R</kbd> / click</div>
+      </div>
+      <div class="row">
+        <div class="scorebar" aria-label="High score bar">
+          <div class="scorebar-fill" id="scoreFill"></div>
+          <div class="scorebar-text">
+            <span id="scoreText">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="customPanel" class="panel hidden" role="dialog" aria-modal="true" aria-label="Customize">
+      <div class="panel-inner">
+        <div class="panel-title">Customize</div>
+        <div class="panel-grid">
+          <label class="field">
+            <span>Tightness</span>
+            <select id="tightnessSelect">
+              <option value="0.85">0.85 (Wide)</option>
+              <option value="1.00" selected>1.00 (Normal)</option>
+              <option value="1.15">1.15 (Tight)</option>
+              <option value="1.30">1.30 (Very tight)</option>
+              <option value="1.45">1.45 (Insane)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Difficulty (base speed)</span>
+            <select id="baseSpeedSelect">
+              <option value="0.25">0.25x (Baby)</option>
+              <option value="0.80">0.80x (Easy)</option>
+              <option value="1.00" selected>1.00x (Normal)</option>
+              <option value="1.20">1.20x (Hard)</option>
+              <option value="1.40">1.40x (Insane)</option>
+              <option value="1.60">1.60x (Demon)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Mode</span>
+            <select id="ogModeSelect">
+              <option value="off" selected>Modern (All sections)</option>
+              <option value="on">OG (No generated sections)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Skin</span>
+            <select id="skinSelect">
+              <option value="classic">Classic</option>
+              <option value="outline">Outline</option>
+              <option value="neon">Neon</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Primary</span>
+            <input id="primaryColor" type="color" value="#dcfaff" />
+          </label>
+          <label class="field">
+            <span>Accent (Dual)</span>
+            <input id="accentColor" type="color" value="#ffe6ff" />
+          </label>
+          <label class="field">
+            <span>Trail</span>
+            <input id="trailColor" type="color" value="#d2f5ff" />
+          </label>
+        </div>
+        <div class="panel-actions">
+          <button class="pill pill-button" id="customReset" type="button">Reset</button>
+          <button class="pill pill-button" id="customClose" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="sectionsPanel" class="panel hidden" role="dialog" aria-modal="true" aria-label="Sections">
+      <div class="panel-inner panel-inner-wide">
+        <div class="panel-title">Pick Sections</div>
+        <div class="panel-sub">
+          Choose what zones/sections can appear. Each one has a different mechanic.
+        </div>
+        <div class="sections-actions">
+          <button class="pill pill-button" id="sectionsAll" type="button">All</button>
+          <button class="pill pill-button" id="sectionsNone" type="button">None</button>
+          <button class="pill pill-button" id="sectionsDefaults" type="button">Defaults</button>
+        </div>
+        <div id="sectionsList" class="sections-list" aria-label="Sections list"></div>
+        <div class="panel-actions">
+          <button class="pill pill-button" id="sectionsPlay" type="button">Play</button>
+          <button class="pill pill-button" id="sectionsClose" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
